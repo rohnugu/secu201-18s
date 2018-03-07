@@ -12,7 +12,7 @@ You can easily find great Git/GitHub guides by googling, but the following links
 3. git - 간편 안내서 https://rogerdudler.github.io/git-guide/index.ko.html
 4. https://github.com/tadkim/infra/wiki/GitHub-::-%EA%B9%83%ED%97%88%EB%B8%8C-%EC%82%AC%EC%9A%A9%EB%B2%95-1
 
-If you are not familiar with command user interface (CUI), consider to use the following GUI tools.
+If you are not familiar with command-line user interface (CUI), consider to use the following GUI tools.
 1. GitHub Desktop: https://desktop.github.com (Very easy, but you cannot work with other Git repository...)
 2. Sourcetree: https://ko.atlassian.com/software/sourcetree (A widely used GUI Git client for Windows and Mac)
 3. TortoiseGit: https://tortoisegit.org/ (Just for Windows but it is integrated with Windows Shell Interface - that is, you can use git in File Explorer.)
