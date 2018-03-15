@@ -27,7 +27,7 @@ The Tower of Hanoi is a well-known mathematical puzzle invented by the French ma
 2. Each move consists of taking the upmost disk from one of the stacks and placing it on top of another stack.
 3. No disk may be placed on top of a smaller disk.
 
-It can be showed that the minimal number of moves required to solve a Tower of Hanoi puzzle is 2<sup><i>n</i></sup> - 1, where <i>n</i> is the number of disks. For example, when only one disk is given, the minimal number of moves is just one, when two disks are given, the minimal number is three. You can check <a href="https://en.wikipedia.org/iki/Tower_of_Hanoi" target="_new">the Tower of Hanoi page from Wikipedia</a> to observe an animated solution of the puzzle.
+It can be showed that the minimal number of moves required to solve a Tower of Hanoi puzzle is 2<sup><i>n</i></sup> - 1, where <i>n</i> is the number of disks. For example, when only one disk is given, the minimal number of moves is just one, when two disks are given, the minimal number is three. You can check <a href="https://en.wikipedia.org/wiki/Tower_of_Hanoi" target="_new">the Tower of Hanoi page from Wikipedia</a> to observe an animated solution of the puzzle.
 
 So, in this task, you should design a 'recursive algorithm' to find the minimal number of moves for the Tower of Hanoi puzzle, and implement the algorithm as a simple C program. The 'required' input parameter for this algorithm is <i>n</i>, and the resulting output is clearly 2<sup><i>n</i></sup> - 1. Since the output is trivial, you should print the 'trace' of your moves to get the minimal number of moves. For example, suppose three disks are given in rod 1 and we should move the disks to rod 3. Then the trace could be:
 * The upmost disk in rod 1 is moved to rod 3.
