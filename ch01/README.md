@@ -21,7 +21,7 @@ Some important comments:
 * Since this repository is owned by the lecturer, you must let the lecturer know your GitHub ID (i.e., username). Please e-mail your GitHub ID to the lecturer. After the lecturer add your ID as a collaborator, you can push your code.
 * Please the relative path (상대경로) of your local repository and the remote Github repository. For example, suppose that the root directory of your local repository is C:\johndoe\gitroot. Then you should write your code into C:\johndoe\gitroot\ch01\task01, since the root directory of the remote Github repository is https://github.com/rohnugu/secu201-18s.
 
-## Task 02: Tower of Hanoi
+## Task 02: Tower of Hanoi (Textbook Exercise 1.3.11)
 The Tower of Hanoi is a well-known mathematical puzzle invented by the French mathematican Edouard Lucas in 1883. In this puzzle, there are three rods (막대) and a (given) number of stacked disks of different sizes. The puzzle starts with the disks in ascending order of size on one rod, i.e., the smallest at the top, so that it the disks make a conical shape. The goal of the puzzle is to move the entire stack to another rod, constraining the following rules:
 1. Only one disk can be moved at a time.
 2. Each move consists of taking the upmost disk from one of the stacks and placing it on top of another stack.
