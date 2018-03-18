@@ -34,7 +34,7 @@ So, in this task, you should design a 'recursive algorithm' to find the minimal 
 * The upmost disk in rod 1 is moved to rod 2.
 * The upmost disk in rod 3 is moved to rod 2.
 * The upmost disk in rod 1 is moved to rod 3.
-* The upmost disk in rod 3 is moved to rod 1.
+* The upmost disk in rod 2 is moved to rod 1.
 * The upmost disk in rod 3 is moved to rod 2.
 * The upmost disk in rod 2 is moved to rod 3.
 * Thus, the minimal number of moves is 7.
