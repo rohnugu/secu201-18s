@@ -35,8 +35,8 @@ So, in this task, you should design a 'recursive algorithm' to find the minimal 
 * The upmost disk in rod 3 is moved to rod 2.
 * The upmost disk in rod 1 is moved to rod 3.
 * The upmost disk in rod 2 is moved to rod 1.
-* The upmost disk in rod 3 is moved to rod 2.
 * The upmost disk in rod 2 is moved to rod 3.
+* The upmost disk in rod 1 is moved to rod 3.
 * Thus, the minimal number of moves is 7.
 
 As said in the class, the design of this algorithm is not easy - you should carefully include 'additional' parameters in your recursive function. It is recommended to design and implement this algorithm without reading any solution. The resulting code should be located in this GitHub repository: https://github.com/rohnugu/secu201-18s/ch01/task02/hanoi_201727####.c where # means a decimal digit so that 201727#### represents your student no.
