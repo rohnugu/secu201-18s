@@ -94,22 +94,20 @@ void smfastTranspose(matrix a, matrix b) {
 }
 
 void smadd(matrix a, matrix b, matrix d) {
-	void smadd(matrix a, matrix b, matrix d) {
-		assert((a != NULL) && (b != NULL) && (d != NULL));
-		int i, j, k;
-		int sRow = 0;
-		for (i = 0; i < 9; i++) {
-			for (j = 0; j < 9; j++) {
-				if (a[i].row == b[j].row && a[i].col == b[j].col) {
-					d[sRow].value = a[i].value + b[j].value;
-					d[sRow].row = a[i].row;
-					d[sRow].col = a[i].col;
-					sRow++;
+	assert((a != NULL) && (b != NULL) && (d != NULL));
+	int i, j, k;
+	int sRow = 0;
+	for (i = 0; i < 9; i++) {
+		for (j = 0; j < 9; j++) {
+			if (a[i].row == b[j].row && a[i].col == b[j].col) {
+				d[sRow].value = a[i].value + b[j].value;
+				d[sRow].row = a[i].row;
+				d[sRow].col = a[i].col;
+				sRow++;
 				}
 			}
 		}
-	}
-};
+	};
 
 void smmultiply(matrix a, matrix b, matrix d) {
 	/* multiply two sparse matrices */
