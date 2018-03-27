@@ -14,9 +14,9 @@ unsigned int smcreate(matrix *a, const unsigned int rows, const unsigned int col
 }
 
 void smremove(matrix *a) {
-	if (a == NULL) // Æ÷ÀÎÅÍÀÇ Æ÷ÀÎÅÍ ÁÖ¼Ò°¡ ¾È ÁÖ¾îÁø »óÅÂ·Î ÇÔ¼ö°¡ ½ÇÇàµÇ¸é
+	if (a == NULL) // í¬ì¸í„°ì˜ í¬ì¸í„° ì£¼ì†Œê°€ ì•ˆ ì£¼ì–´ì§„ ìƒíƒœë¡œ í•¨ìˆ˜ê°€ ì‹¤í–‰ë˜ë©´
 		return;
-	if (*a == NULL) // ¹è¿­ÀÇ base point°¡ NULLÀÌ¸é
+	if (*a == NULL) // ë°°ì—´ì˜ base pointê°€ NULLì´ë©´
 		return;
 	free(*a); // if *a does not point to a dynamically allocated memory from malloc/smcreate, it will do an undefined behavior!
 	*a = NULL;
@@ -24,7 +24,7 @@ void smremove(matrix *a) {
 
 void smtranspose(matrix a, matrix b) {
 	assert((a != NULL) && (b != NULL));
-	assert(b[0].row * b[0].col >= a[0].value); // dynamic allocation ¹®Á¦ Ã³¸® °í·ÁÇÔ
+	assert(b[0].row * b[0].col >= a[0].value); // dynamic allocation ë¬¸ì œ ì²˜ë¦¬ ê³ ë ¤í•¨
 
 											   /* b is set to the transpose of a */
 	int numTerms, currentb;
@@ -54,7 +54,7 @@ void smfastTranspose(matrix a, matrix b) {
 
 	/* the transpose of a is placed in b */
 	assert((a != NULL) && (b != NULL));
-	assert(b[0].row * b[0].col >= a[0].value); // dynamic allocation ¹®Á¦ Ã³¸® °í·ÁÇÔ
+	assert(b[0].row * b[0].col >= a[0].value); // dynamic allocation ë¬¸ì œ ì²˜ë¦¬ ê³ ë ¤í•¨
 
 	int numTerms;
 	numTerms = a[0].value; 	/* total number of elements */
@@ -108,9 +108,8 @@ void smadd(matrix a, matrix b, matrix d) {
 				}
 			}
 		}
-	};
-}
-
+	}
+};
 
 void smmultiply(matrix a, matrix b, matrix d) {
 	/* multiply two sparse matrices */
