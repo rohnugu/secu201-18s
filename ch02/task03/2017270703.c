@@ -1,4 +1,4 @@
-#include "smatrix.h"
+﻿#include "smatrix.h"
 
 void storeSum(matrix d, int *totalD, int row, int column, int *sum);
 
@@ -14,9 +14,9 @@ unsigned int smcreate(matrix *a, const unsigned int rows, const unsigned int col
 }
 
 void smremove(matrix *a) {
-	if(a == NULL) // �������� ������ �ּҰ� �� �־��� ���·� �Լ��� ����Ǹ�
+	if(a == NULL) // 포인터의 포인터 주소가 안 주어진 상태로 함수가 실행되면
 		return;
-	if(*a == NULL) // �迭�� base point�� NULL�̸�
+	if(*a == NULL) // 배열의 base point가 NULL이면
 		return;
 	free(*a); // if *a does not point to a dynamically allocated memory from malloc/smcreate, it will do an undefined behavior!
 	*a = NULL;
@@ -24,7 +24,7 @@ void smremove(matrix *a) {
 
 void smtranspose(matrix a, matrix b) {
 	assert( (a != NULL) && (b != NULL) );
-	assert( b[0].row * b[0].col >= a[0].value ); // dynamic allocation ���� ó�� ������
+	assert( b[0].row * b[0].col >= a[0].value ); // dynamic allocation 문제 처리 고려함
 
 	/* b is set to the transpose of a */
 	int numTerms, currentb;
@@ -54,7 +54,7 @@ void smfastTranspose(matrix a, matrix b) {
 
 	/* the transpose of a is placed in b */
 	assert( (a != NULL) && (b != NULL) );
-	assert( b[0].row * b[0].col >= a[0].value ); // dynamic allocation ���� ó�� ������
+	assert( b[0].row * b[0].col >= a[0].value ); // dynamic allocation 문제 처리 고려함
 
 	int numTerms;
 	numTerms	= a[0].value; 	/* total number of elements */
@@ -95,12 +95,32 @@ void smfastTranspose(matrix a, matrix b) {
 void smadd(matrix a, matrix b, matrix d){
 	d[0].col=a[0].col>=b[0].col?a[0].col:b[0].col;
 	d[0].row=a[0].row>=b[0].row?a[0].row:b[0].row;
+
+	// hjroh
+	// 두 matrix의 행/열 크기를 비교해 큰 쪽이 되도록 하는 건
+	// 나쁘지 않은 아이디어지만, 교재의 ADT SparseMatrix 명세는
+	// 크기가 같은 두 행렬의 합을 정의하고 있으니까
+	// 명세대로 작성하는 게 올바릅니다.
+	// 프로그래머가 자의적으로 요구사항을 해석한 뒤,
+	// 그로 인한 문제가 생기면 프로그래머가 책임을 져야 하니까요.
 	int ct_i;
 	int ct_j;
 	int value=0;
+	// hjroh
+	// value라는 변수의 의미가 불분명합니다.
+	// 더군다나 구조체에 value라는 멤버 변수가 있으니
+	// 읽는 사람이 헷갈립니다.
 	for(int ct_i=0;ct_i<d[0].row;ct_i++){
+		// hjroh
+		// 앞에서 ct_i를 선언한 상태에서 for에서 다시 선언한 건
+		// 바람직하지 않습니다. 불필요한 스택 공간을 낭비할 필요가 없죠.
+		// 그리고 a, b, d의 index는 2차원 배열의 index가 아니라
+		// 1차원 배열의 인덱스라서, 아래 코드는 전부 동작하지 않겠네요.
 		for(int ct_j=0;ct_j<d[0].col;ct_j++){
 			if(a[ct_i+1].row==b[ct_i+1].row&&a[ct_j+1].col<b[ct_j+1].row){
+				// hjroh
+				// ct_i+1 같은 경우는 ct_i + 1로 띄어쓰는 게 좋습니다.
+				// 코드를 빠르게 읽다보면 ct_(i+1)로 오해할 수 있으니까요.
 				value++;
 				d[ct_i+1].value=a[ct_i+1].value;
 			}	

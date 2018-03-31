@@ -93,17 +93,7 @@ void smfastTranspose(matrix a, matrix b) {
 	}
 }
 
-void smadd(matrix a, matrix b, matrix d){
-    for(int i=0;i<a.rows;i++){
-        for(int j=0; j.cols;j++){
-            a.e[i][j]=b.e[i][j]+d.[i][j];
-        }
-    }
-
-
-
-}
-
+void smadd(matrix a, matrix b, matrix d);
 
 
 void smmultiply(matrix a, matrix b, matrix d) {

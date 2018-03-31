@@ -1,4 +1,9 @@
 void smadd(matrix a, matrix b, matrix d) {
+	// hjroh
+	// a[i].value의 사이즈만 어떻게 처리했다면 좋았겠네요.
+	// 나머지는 좋습니다.
+	// 아, d의 0번째 element를 설정하지 않은 부분은 수정해야 합니다.
+	
 	assert((a != NULL) && (b != NULL) && (d != NULL));
 	int i, j, k;
 	int dRow = 0;

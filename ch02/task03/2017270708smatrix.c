@@ -93,6 +93,10 @@ void smfastTranspose(matrix a, matrix b) {
 }
 
 void smadd(matrix a, matrix b, matrix d){
+	// hjroh
+	// a[i]의 값을 읽어서 d에 넣을 생각을 한 모양인데,
+	// a[0].row가 아니라 a[0].value를 종료조건으로 했어야 합니다.
+	// 즉, for(i =1; i<a[0].value; i++)가 들어갔으면 더 좋았겠네요.
   int i;
     for(i = 1;i<a[0].row;i++) {
         d[i] = a[i].row;

@@ -1,4 +1,4 @@
-#include "smatrix.h"
+﻿#include "smatrix.h"
 
 void storeSum(matrix d, int *totalD, int row, int column, int *sum);
 
@@ -14,9 +14,9 @@ unsigned int smcreate(matrix *a, const unsigned int rows, const unsigned int col
 }
 
 void smremove(matrix *a) {
-	if (a == NULL) // �������� ������ �ּҰ� �� �־��� ���·� �Լ��� ����Ǹ�
+	if (a == NULL) // Æ÷ÀÎÅÍÀÇ Æ÷ÀÎÅÍ ÁÖ¼Ò°¡ ¾È ÁÖ¾îÁø »óÅÂ·Î ÇÔ¼ö°¡ ½ÇÇàµÇ¸é
 		return;
-	if (*a == NULL) // �迭�� base point�� NULL�̸�
+	if (*a == NULL) // ¹è¿­ÀÇ base point°¡ NULLÀÌ¸é
 		return;
 	free(*a); // if *a does not point to a dynamically allocated memory from malloc/smcreate, it will do an undefined behavior!
 	*a = NULL;
@@ -24,7 +24,7 @@ void smremove(matrix *a) {
 
 void smtranspose(matrix a, matrix b) {
 	assert((a != NULL) && (b != NULL));
-	assert(b[0].row * b[0].col >= a[0].value); // dynamic allocation ���� ó�� ������
+	assert(b[0].row * b[0].col >= a[0].value); // dynamic allocation ¹®Á¦ Ã³¸® °í·ÁÇÔ
 
 											   /* b is set to the transpose of a */
 	int numTerms, currentb;
@@ -54,7 +54,7 @@ void smfastTranspose(matrix a, matrix b) {
 
 	/* the transpose of a is placed in b */
 	assert((a != NULL) && (b != NULL));
-	assert(b[0].row * b[0].col >= a[0].value); // dynamic allocation ���� ó�� ������
+	assert(b[0].row * b[0].col >= a[0].value); // dynamic allocation ¹®Á¦ Ã³¸® °í·ÁÇÔ
 
 	int numTerms;
 	numTerms = a[0].value; 	/* total number of elements */
@@ -100,6 +100,12 @@ void smadd(matrix a, matrix b, matrix d) {
 	}
 	d[0].col = a[0].col;
 	d[0].row = a[0].row;
+	// hjroh
+	// 여기까지는 잘 했습니다.
+	// 다만 아래 부분은 SparseMatrix 구조체가
+	// 주어진 점을 고려할 때
+	// 다르게 설계하는 게 나았을 수 있습니다.
+	// 그럼에도 불구하고 아래처럼 생각하고 완성할 수도 있습니다.
 	
 	for (int i = 1; i < d[0].col; i++) {
 		for(int j=1;j<d[0].row;j++) {

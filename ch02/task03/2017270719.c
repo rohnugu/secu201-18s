@@ -113,6 +113,8 @@ void mprint(matrix a, bool pointer) {
         }
 }
 void smatrix_add(matrix a, matrix b , matrix *d){
+        // hjroh
+        // 파일을 잘못 카피해서 고생했겠네요.
 
         assert(a != NULL);
         assert((a.rows[0] >  0 && a.cols[0] > 0));
@@ -125,6 +127,11 @@ void smatrix_add(matrix a, matrix b , matrix *d){
         d->cols[0] = a.cols[0];
         BR = 1;
         AR = 1;
+
+        // hjroh
+        // 여기까지는 잘 했던 것 같습니다.
+        // 다만 a.rows[0]을 종료조건에 반영한 것은
+        // 전체적인 동작을 제대로 그리지 못한 것으로 보이네요.
         for(i = StartPoint ; i < a.rows[0] , i ++){
                 if(a.rows[StartPoint] == b.rows[] ){
                         if(a.cols[AR] == b.cols[BR] ){

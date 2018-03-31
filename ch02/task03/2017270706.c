@@ -94,31 +94,20 @@ void smfastTranspose(matrix a, matrix b) {
 }
 
 void smadd(matrix a, matrix b, matrix d){
-	d[0].col=a[0].col>=b[0].col?a[0].col:b[0].col;
-	d[0].row=a[0].row>=b[0].row?a[0].row:b[0].row;
-	int ct_i;
-	int ct_j;
-	int value=0;
-	for(int ct_i=0;ct_i<d[0].row;ct_i++){
-		for(int ct_j=0;ct_j<d[0].col;ct_j++){
-			if(a[ct_i+1].row==b[ct_i+1].row&&a[ct_j+1].col<b[ct_j+1].row){
-				value++;
-				d[ct_i+1].value=a[ct_i+1].value;
-			}	
-			else if(a[ct_i+1].row==b[ct_i+1].row&&a[ct_j+1].col==b[ct_j+1].row){
-				value++;
-				d[ct_i+1].value=a[ct_i+1].value+b[ct_i].value;	
-			}
-			else if(a[ct_i+1].row==b[ct_i+1].row&&a[ct_j+1].col>b[ct_j+1].col){
-				value++;
-				d[ct_i+1].value==b[ct_i+1].value;
-			}
-}
+	// hjroh
+	// 아래 부분은 SparseMatrix 구조체가
+	// 주어진 점을 고려할 때
+	// 다르게 설계했어야 했겠죠?	
+    for(int i=0;i<a.rows;i++){
+        for(int j=0; j.cols;j++){
+            a.e[i][j]=b.e[i][j]+d.[i][j];
+        }
+    }
+
+
 
 }
 
-
-}
 
 
 void smmultiply(matrix a, matrix b, matrix d) {
