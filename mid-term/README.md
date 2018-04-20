@@ -7,7 +7,7 @@ How to submit your work
    * The filename should be SECU201-18S_mid-term_201727####.zip
  - Copy the ZIP file to ./mid-term directory.
  - Using the public key ./mid-term/publickey.asc, encrypt the ZIP, and the resulting filename should be SECU201-18S_mid-term_201727####.zip.asc.
-   * In Windows: Import the public key, and encrypte the ZIP file.
+   * In Windows: Import the public key, and encrypt the ZIP file.
      * For More Information: http://newsreading.tistory.com/77?category=563856
    * In Linux: Import the public key with gpg --import publickey.asc, and encrypt the ZIP file with gpg -e -r hjroh@korea.ac.kr SECU201-18S_mid-term_201727####.zip.
      * For More Information: https://linuxaria.com/howto/how-to-easily-encrypt-a-file-with-gpg-on-linux
