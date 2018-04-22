@@ -1,6 +1,9 @@
 # Mid Term Exam, SECU201-18S
 SECU201 Data Structure, Spring 2018
 
+Errata
+ - In Problem 3, sigma -> omega
+
 How to submit your work
  - Clone our SECU201 GitHub repository in your computer.
  - Archive your whole work in a ZIP file in other directory.
