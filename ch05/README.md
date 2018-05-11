@@ -1,6 +1,6 @@
 # Chapter 05 Trees, SECU201-18S
 
-## Task 04: The Satisfiability Theorem
+## Task 04: The Satisfiability Problem
 In the textbook (or the lecture 17 slides), you can find the satisfiability problem (SAT). You should write a program to check all possible combinations for the given propositional expression (or formula) using the binary tree structure and the postorder traversal.
 
 The expression uses three operators:
