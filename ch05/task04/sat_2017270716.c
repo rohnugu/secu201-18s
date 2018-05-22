@@ -49,7 +49,7 @@ void postOrderEval(treePointer node) {
 		}
 	}
 }
-
+//
 void main() {
 	char ch[100];
 	printf("input postfix formula(TURE=1, FALSE=0) >> ");
