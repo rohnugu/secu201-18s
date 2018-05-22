@@ -1,4 +1,4 @@
-//�̿��� �ڵ�
+//¹Ì¿ÏÀÇ ÄÚµå
 #include <stdio.h>
 #include <stdlib.h>
 #define TRUE 1
