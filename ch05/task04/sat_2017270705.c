@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 #define TRUE 1
 #define FALSE 0
+#define SIZE 50
 #define STACK_SIZE 50
 
 
@@ -34,6 +36,9 @@ treePointer root = NULL;		// root
 const int isp[] = { 0, 0, 0, 1, 2, 3, 4, 0 };
 const int icp[] = { 0, 0, 5, 1, 2, 3, 4, 0 };
 
+// variable space
+int var_space[SIZE];
+
 void pushStack(int *top, treePointer item);
 treePointer popStack(int *top);
 void postorderEval(treePointer ptr);
@@ -42,26 +47,99 @@ logical getToken(treePointer *str_arr, treePointer *symbol, int *n);
 void postfix();
 void convert_to_tree();
 void printToken();
+void var_cnt(char *str, int *space, int *cnt);
+void all_of_situation(int *var_space, char *str, int cnt);
+int power(int x, int y);
+
+
+
 
 int main() {
-	char str[100];
-	printf("input formula [ex. 0v(1^-0)] : \n");
+	int cnt = 0, round;
+	char str[100];			// input string
+	char cpy[100];
+	printf("input any formula [ex. Av(B^-C)] : \n");
+
 	gets(str);
+	strcpy(cpy, str);
+	printf("String = %s\n", cpy);
 
-	convert_to_word(str);
-	postfix();
-	//printf("postfix : %s", save_post);
-	printToken();
-	convert_to_tree();
-	postorderEval(root);
+	var_cnt(str, var_space, &cnt);
+	
+	round = power(2, cnt);
 
-	int result = root->value;
-	if (result)
-		printf("\nresult = TRUE\n");
-	else
-		printf("\nresult = FALSE\n");
 
+	while(round--){
+		all_of_situation(var_space, cpy, cnt);
+		printf("%s\n", cpy);
+		convert_to_word(cpy);
+		postfix();
+		printToken();
+		convert_to_tree();
+		postorderEval(root);
+
+		int result = root->value;
+		if (result)
+			printf("\nresult = TRUE\n\n");
+		else
+			printf("\nresult = FALSE\n\n");
+
+	}
 	return 0;
+}
+
+
+int power(int x, int y) {
+	int result = 1;
+	for (int i = 0; i < y; i++) {
+		result *= x;
+	}
+	return result;
+}
+
+
+void var_cnt(char *str, int *space, int *cnt) {
+	do {
+		switch (*str) {
+		case '-':
+		case '^':
+		case 'v':
+		case '(':
+		case ')':
+			break;
+		default:
+			*space++ = 1;
+			(*cnt)++;
+		}
+	} while (*++str != NULL);
+	printf("number of var = %d\n\n", *cnt);
+
+}
+
+void all_of_situation(int *var_space, char *str, int cnt) {
+	int round = 0;
+	for (int i = 0, j = 0; str[i] != NULL; i++) {
+		switch (str[i]) {
+		case '-':
+		case '^':
+		case 'v':
+		case '(':
+		case ')':
+			break;
+		default:
+			str[i] = var_space[j++] + '0';
+		}
+	}
+
+	int k = 0;
+
+	for (int i = 0; i < cnt; i++)
+		k |= var_space[i] << (cnt - 1) - i;
+	k -= 1;
+	for (int i = 0; i < cnt; i++) {
+		var_space[i] = (k & power(2, (cnt - 1) - i))
+			>> ((cnt - 1) - i);
+	}
 }
 
 
@@ -79,7 +157,7 @@ treePointer popStack(int *top) {
 	}
 	return stack[(*top)--];
 }
-// ÈÄÀ§ ¼øÈ¸(p.230)
+// í›„ìœ„ ìˆœíšŒ(p.230)
 void postorderEval(treePointer ptr) {
 	if (ptr) {
 		postorderEval(ptr->leftChild);
@@ -106,7 +184,7 @@ void postorderEval(treePointer ptr) {
 		}
 	}
 }
-// ÀÔ·ÂÇÑ ½ÄÀ» °¢°¢ÀÇ ³ëµå¿¡ ³Ö¾îÁÜ
+// ìž…ë ¥í•œ ì‹ì„ ê°ê°ì˜ ë…¸ë“œì— ë„£ì–´ì¤Œ
 void convert_to_word(char *ptr) {
 	int cnt = 0;
 	while (ptr[cnt] != NULL) {
@@ -167,7 +245,7 @@ logical getToken(treePointer *str_arr,treePointer *symbol, int *n) {
 	}
 }
 
-// ¼ö½ÄÀ» ÈÄÀ§ Ç¥±â½ÄÀ¸·Î ÀúÀå (p.144)
+// ìˆ˜ì‹ì„ í›„ìœ„ í‘œê¸°ì‹ìœ¼ë¡œ ì €ìž¥ (p.144)
 void postfix() {
 	treePointer symbol;
 	treePointer *str = save_post;
@@ -237,6 +315,8 @@ void convert_to_tree() {
 
 void printToken() {
 	treePointer *str = save_post;
+
+	printf("postfix : ");
 	while (*str != NULL) {
 		switch ((*str)->data) {
 		case false:
@@ -259,3 +339,4 @@ void printToken() {
 		}
 	}
 }
+
