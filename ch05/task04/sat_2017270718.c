@@ -1,10 +1,13 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
+#include<ctype.h>
+#include<math.h>
 
 #define TRUE 1
 #define FALSE 0
 
-typedef enum {true, false , not, and, or } logical;
+typedef enum { false, true, not, and, or } logical;
 
 typedef struct _node *treePointer;
 typedef struct _node {
@@ -17,7 +20,7 @@ typedef struct _node {
 
 void postOrderEval(treePointer node);
 
-/* stack ±¸ÇöºÎ */
+/* stack êµ¬í˜„ë¶€ */
 typedef struct _element {
 	char value;
 } element;
@@ -51,9 +54,9 @@ char popStack(stack *_stack) {
 }
 
 char readStack(stack  *_stack) {
- 	return (*_stack)[stack_top].value;
+	return (*_stack)[stack_top].value;
 }
-/* ¸¸µç °Å */
+/* ë§Œë“  ê±° */
 void convertToPost(char* exp);
 int precedence(char oprt);
 void makeTree(treePointer node, char* exp);
@@ -62,31 +65,52 @@ void makeTree(treePointer node, char* exp);
 void main() {
 
 	char exp[256];
-	int i;
+	char index[256] = { 0 };
+	int i, j, scaler = 0;
 
 	node root;
 
-	printf("input infix expression : ");
+	printf("input infix expression (|, &, !, a, b, c ...) : ");
 	gets(exp);
 
-	/* ÀÔ·ÂÇÑ ½ÄÀ» ÈÄÀ§ ½ÄÀ¸·Î Ç¥Çö */
+	/* ì…ë ¥í•œ ì‹ì„ í›„ìœ„ ì‹ìœ¼ë¡œ í‘œí˜„ */
 	convertToPost(exp);
-	printf("Postfix exprssion : %s\n",exp);
-	
+	printf("Postfix exprssion : %s\n", exp);
 
-	/* ÈÄÀ§ ½ÄÀ» tree·Î Ç¥Çö */
+	/* ë³€ìˆ˜ì— ëª¨ë“  ê²½ìš°ì˜ ìˆ˜ ëŒ€ì… */
 	exp_len = strlen(exp);
-	makeTree(&root, exp);	
 
-	/* µ¹¸®±â */
-	postOrderEval(&root);
-	
-	if (root.value) {
-		printf("Satisfiable combination!\n");
+	//í•„ìš”í•œ ë³€ìˆ˜ ê°œìˆ˜ êµ¬í•˜ê¸°
+	for (i = 0; i < exp_len; i++)
+		if (isalpha(exp[i])) {
+			index[scaler] = i;
+			scaler++;
+		}
+
+
+	//ë³€ìˆ˜ì— 0 1 ëŒ€ì…í•˜ê¸°
+	/* í›„ìœ„ ì‹ì„ treeë¡œ í‘œí˜„ */
+	for (i = 0; i < (int)pow(2.0, scaler); i++) {
+		for (j = 0; j < scaler; j++) {
+			if (i & (int)pow(2.0, j))
+				exp[index[j]] = '1';
+			else
+				exp[index[j]] = '0';
+		}
+		exp_len = strlen(exp);
+		printf("[%d] %s\n", i + 1, exp);
+		makeTree(&root, exp);
+
+		/* ëŒë¦¬ê¸° */
+		postOrderEval(&root);
+
+		//printf("%d\n", root.value);
+		if (root.value) {
+			printf("Satisfiable combination!\n");
+		}
+		else
+			printf("No satisfiable combination\n");
 	}
-	else
-		printf("No satisfiable combination\n");
-
 	system("pause");
 }
 
@@ -95,14 +119,14 @@ treePointer CreateNewNode() {
 	newNode->data = 0;
 	newNode->leftChild = NULL;
 	newNode->rightChild = NULL;
-	
+
 	return newNode;
 }
 
 void makeTree(treePointer node, char* exp) {
 	treePointer newNode = NULL;
 	char token = exp[exp_len - 1];
-	
+
 	exp_len--;
 	if (exp_len != -1) {
 		switch (token) {
@@ -137,9 +161,9 @@ void makeTree(treePointer node, char* exp) {
 	}
 }
 
-void convertToPost(char* exp) {  // ÈÄÀ§ ¼ö½ÄÀ¸·Î ¹Ù²ãÁÜ.
-	char tmp[256] = {' ',' '};
-	int i, tmp_top=0;
+void convertToPost(char* exp) {  // í›„ìœ„ ìˆ˜ì‹ìœ¼ë¡œ ë°”ê¿”ì¤Œ.
+	char tmp[256] = { ' ',' ' };
+	int i, tmp_top = 0;
 
 	stack stackOper = NULL;
 
@@ -147,11 +171,8 @@ void convertToPost(char* exp) {  // ÈÄÀ§ ¼ö½ÄÀ¸·Î ¹Ù²ãÁÜ.
 
 	for (i = 0; i < strlen(exp); i++) {
 		if (exp[i] != ' ') {
-			if (exp[i] == '1' || exp[i] == '0') { // tmp[i]´Â Âü, °ÅÁş
-				tmp[tmp_top] = exp[i];
-				tmp_top++;
-			}
-			else {  // tmp[i]°¡ ºÎÈ£
+
+			if (exp[i] == '|' || exp[i] == '&' || exp[i] == '!') {  // tmp[i]ê°€ ë¶€í˜¸
 				if (stack_top != -1 && readStack(&stackOper)) {
 					while (precedence(exp[i]) <= precedence(readStack(&stackOper))) {//
 						tmp[tmp_top] = popStack(&stackOper);
@@ -159,6 +180,10 @@ void convertToPost(char* exp) {  // ÈÄÀ§ ¼ö½ÄÀ¸·Î ¹Ù²ãÁÜ.
 					}
 				}
 				pushStack(&stackOper, exp[i]);
+			}
+			else { // tmp[i]ëŠ” ì°¸, ê±°ì§“
+				tmp[tmp_top] = exp[i];
+				tmp_top++;
 			}
 		}
 	}
