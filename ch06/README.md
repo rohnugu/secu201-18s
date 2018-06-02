@@ -1,6 +1,6 @@
 # Chapter 06 Graphs, SECU201-18S
 
-## Task 05: Implementing Graph Algroithms
+## Task 05: Implementing Graph Algorithms
 In Lecture 22 and 23 (or Chapter 6 of the textbook), we covered two algorithms for the Minimum-Cost Spanning Tree (MST) problem, and two algortihms for the Single Source/All Destination Shortest Path problem. You should write a program for MST problem and a program for the shortest path problem.
 
 For MST problem, you can choose one of the following algorithms (with the corresponding filename):
