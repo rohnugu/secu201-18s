@@ -2,7 +2,7 @@
 SECU201 Data Structure, Spring 2018
 
 Errata
- - Currently, none
+ - In Problem 7, "Problem 8" should be changed to "Problem 6".
 
 How to submit your work
  - Clone our SECU201 GitHub repository in your computer.
